@@ -4,7 +4,7 @@
   "description": "Node And React Project",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage --detectOpenHandles --forceExit",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },

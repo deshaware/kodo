@@ -1,7 +1,5 @@
 const router = require('express').Router();
-const data = require('../data/mock_data.json');
 const pg = require("../data");
-const service = require('../service')
 
 router.get('/getData', async ( req, res ) => {
     try {
@@ -10,7 +8,8 @@ router.get('/getData', async ( req, res ) => {
         let select = (search) ? `Select * from data where name ilike '%${search}%' or description ilike '%${search}%'` : `Select * from data`;
 
         let sort = ( sortBy && sortBy.toLowerCase() === 'name') ? (` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`) :
-            ( sortBy && sortBy.toLowerCase() === 'datelastedited' ) ? (` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`) : ` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}` ;
+            ( sortBy && sortBy.toLowerCase() === 'datelastedited' ) ? (` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`) :
+            (` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`);
 
         let limitRecord = (limit && limit > 0) ? ` LIMIT ${limit}` : ' LIMIT ALL';
         let offset = (skip && skip > 0) ? ` OFFSET ${skip}` : ' OFFSET 0';
