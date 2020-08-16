@@ -32,7 +32,8 @@ header img {
 
 #search{
     display: block;
-    flex: 1 1 auto;
+    flex: 0.5;
+    align-content: stretch;
     padding: 10px;
     font-size: 20px;
     border: 0;
