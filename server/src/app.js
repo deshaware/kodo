@@ -15,7 +15,7 @@ app.use( (req, res, next) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false}))
 
-app.use('/api/v1/data', require('./router/entities'));
+app.use('/api/v1/data', require('./routes/entities'));
 app.use('/', (req, res)=> res.status(200).send({ message: 'Backed is running'}));
 
 module.exports = app;

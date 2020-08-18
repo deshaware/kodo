@@ -14,13 +14,14 @@ router.get('/getData', async ( req, res ) => {
         let limitRecord = (limit && limit > 0) ? ` LIMIT ${limit}` : ' LIMIT ALL';
         let offset = (skip && skip > 0) ? ` OFFSET ${skip}` : ' OFFSET 0';
 
-        const query = select + sort + limitRecord + offset;
+        const countQuery = await pg.query(select)
+        const query = select + sort + offset + limitRecord ;
         console.log(query)
         let result = await pg.query(query)
         res.status(200).send({
             status: 'SUCCESS',
             message: 'Data fetched successfully',
-            responseCount: result.rowCount,
+            responseCount: countQuery.rowCount,
             response: result.rows
         })
     } catch (error) {
