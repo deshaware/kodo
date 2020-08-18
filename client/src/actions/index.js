@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { GET_RECORDS, CLEAR_RECORDS, LOADING } from './types';
 
-export const fetchRecords = (query) => dispatch => {
+import { generateQuery } from '../service';
+
+export const fetchRecords = (search, sortBy) => dispatch => {
     //initially state changed to loading
     console.log("Tryina fetch")
+    
     dispatch(dataLoading());
-    axios.get(generateQuery(query))
+    axios.get(generateQuery(search, sortBy))
         .then( res => {
             dispatch({
                 type: GET_RECORDS,
@@ -34,7 +37,3 @@ export const dataLoading = () => {
     }
 }
 
-const generateQuery = (query) => {
-    console.log(query)
-    return "/api/v1/data/getData";
-}

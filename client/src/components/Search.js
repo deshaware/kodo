@@ -6,13 +6,12 @@ import {clearRecords, fetchRecords} from '../actions';
 
 const Search = () => {
     const [ search, setSearch] = useState('');
-    const [ sortBy, setSortBy] = useState('Sort');
-
+    const [ sortBy, setSortBy] = useState('name');
 
     const dispatch = useDispatch()
-    const {items, isLoading} = useSelector(state => ({
-        items: state.data.records,
-        isLoading: state.data.loading
+
+    const { items } = useSelector(state => ({
+            items: state.data.records
         }), shallowEqual)
 
     const onChangeInput = e => {
@@ -28,13 +27,15 @@ const Search = () => {
     useEffect( () => {
         console.log("useEffect")
         console.log("items", items)
-        items.length == 0 && fetchData()
+        fetchData()
     }, [search, sortBy])
 
     const fetchData = () => {
         dispatch(clearRecords)
-        dispatch(fetchRecords(search + sortBy))
+        dispatch(fetchRecords(search , sortBy))
     }
+
+    // fetchData()
     return (
         <div id="form">
             <input 
@@ -49,7 +50,7 @@ const Search = () => {
                     
             <select name="sort" id="sort" value={sortBy} onChange={ e => onChangeSelect(e) }>
                 <option value="name">Title</option>
-                <option value="datelastedit">DateLastEdited</option>
+                <option value="datelastedited">DateLastEdited</option>
             </select>
             
         </div>

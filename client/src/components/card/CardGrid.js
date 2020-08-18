@@ -5,6 +5,7 @@ import Loader from '../Loader';
 const CardGrid = ( {items, isLoading} ) => {
 
     console.log("CardGrid", items)
+    console.log("CardGrid", isLoading)
     return isLoading ? (
             <Loader />
         ) : (

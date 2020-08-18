@@ -12,6 +12,8 @@ function App() {
     items: state.data.records,
     isLoading: state.data.loading
     }), shallowEqual)
+
+  console.log(items)
   
   return (
       <div className="container">
