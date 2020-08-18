@@ -1,11 +1,26 @@
+const regexForQuotes = /"(.*?)"/gi;
 
-const sortData = ( data, sortBy, orderBy ) => {
-    console.log("orderBy")
-    if(sortBy === 'title')
-        (orderBy && orderBy == "desc") ? data.sort( ( a, b) => b[sortBy] - a[sortBy] ) : data.sort( ( a, b) => (a[sortBy] > b[sortBy]) ? 1 : 0 )
-    if(sortBy === 'dateLastEdited')
-        (orderBy && orderBy == "desc") ? data.sort( ( a, b) => b[sortBy] - a[sortBy] ) : data.sort( ( a, b) => a[sortBy] - b[sortBy] );
-    return data;
+
+const termGenerator = (search) => {
+    console.log("term generator", search)
+    console.log(search.replace(/"/g, ''))
+    if (regexForQuotes.test(search))
+    {
+        console.log("Quotes exists")
+        return `Select * from data where name ilike '%${search.replace(/"/g, '')}%' or description ilike '%${search.replace(/"/g, '')}%'`;
+    }
+        
+    if (search.split(' ')[1]){
+        console.log("Spaces exists")
+        return `Select * from data where name ilike '%${search.split(" ").join("%")}%' or description ilike '%${search.split(" ").join("%")}%'`;
+    }
+    return `Select * from data where name ilike '%${search}%' or description ilike '%${search}%'`
 }
 
-module.exports = { sortData };
+const sortData = ( sortBy, orderBy ) => {
+   return  ( sortBy && sortBy.toLowerCase() === 'name') ? (` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`) :
+            ( sortBy && sortBy.toLowerCase() === 'datelastedited' ) ? (` order by datelastedited ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`) :
+            (` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`);
+}
+
+module.exports = { sortData, termGenerator };

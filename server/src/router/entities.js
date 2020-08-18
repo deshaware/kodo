@@ -1,15 +1,15 @@
 const router = require('express').Router();
 const pg = require("../data");
+const { sortData, termGenerator } = require('../service');
 
 router.get('/getData', async ( req, res ) => {
     try {
         const { search, sortBy, orderBy, limit, skip } = req.query;
 
-        let select = (search) ? `Select * from data where name ilike '%${search}%' or description ilike '%${search}%'` : `Select * from data`;
+        let select = (search) ? termGenerator(search) : `Select * from data`;
+        console.log(search)
 
-        let sort = ( sortBy && sortBy.toLowerCase() === 'name') ? (` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`) :
-            ( sortBy && sortBy.toLowerCase() === 'datelastedited' ) ? (` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`) :
-            (` order by name ${orderBy && orderBy === 'desc' ? 'desc' : 'asc'}`);
+        let sort = sortData(sortBy, orderBy)
 
         let limitRecord = (limit && limit > 0) ? ` LIMIT ${limit}` : ' LIMIT ALL';
         let offset = (skip && skip > 0) ? ` OFFSET ${skip}` : ' OFFSET 0';
