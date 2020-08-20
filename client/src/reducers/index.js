@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
 import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE } from '../actions/types';
+import {persistor} from '../store';
 
 //service
 import { setPages } from '../service';
 
 const initialState = {
     records: [],
-    pages: [],
+    pages: 0,
     recordsCount: 0,
     currentPage: 1,
     search: '',
@@ -34,10 +35,11 @@ const data = (state = initialState, action) => {
                 currentPage: 1
             };
         case CLEAR_RECORDS:
+            persistor.purge()
             return {
                 ...state,
                 loading: false,
-                pages: [],
+                pages: 0,
                 records: [],
                 search: '',
                 sortBy: ''

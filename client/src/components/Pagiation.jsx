@@ -3,30 +3,39 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
 import { setCurrentPage } from '../actions';
 
-const Pagiation = ({ pages, currentPage }) => {
+const Pagiation = () => {
 
     const [ page, setPage ] = useState(1)
 
     const dispatch = useDispatch()
 
-    const { search, sortBy } = useSelector(state => ({
+    const { search, sortBy, totalPages, currentPage } = useSelector(state => ({
         search: state.data.search,
-        sortBy: state.data.sortBy
+        sortBy: state.data.sortBy,
+        totalPages: state.data.pages,
+        currentPage: state.data.currentPage
       }),
       shallowEqual)
     
     
     const generatePages = () => {
-        let arr = []
-        for (let index = 1; index <= pages; index++) {
-            console.log("GENERATING PAGE NUMBER", pages)
-            arr.push( <a  key={index} onClick={ (e) => setPage(index) }>{index}</a>)
+        let arr = [];
+
+        for (let index = currentPage; index <= totalPages; index++) {
+            console.log("GENERATING PAGE NUMBER", currentPage)
+            arr.push( <a  
+                key={index} 
+                onClick={ (e) => setPage(index) }
+                style={{border: currentPage === index ? '#4CAF50': '#fff'}}
+            >{index}</a>)
+            if(arr.length == 6)
+                return arr
         }
         return arr;
     }
 
     useEffect(() => {
-        console.log("UseEffectPagination")
+        console.log("UseEffectPagination", page)
         changePage()
         // return () => {
         //     console.log("UseEffectPaginationReturn")
@@ -39,9 +48,9 @@ const Pagiation = ({ pages, currentPage }) => {
 
     return (
         <div className="pagination">
-        <a onClick={ e  => setPage(page-1)} >&laquo;</a>
+        <a  onClick={ e  => currentPage > 1 ? setPage(page-1) : ''} >&laquo;</a>
             {generatePages()}
-        <a onClick={ e  => setPage(page-1)} >&raquo;</a>
+        <a onClick={ e  => page + 5 < totalPages ? setPage(page+1): ''} >&raquo;</a>
         </div>
     )
 }

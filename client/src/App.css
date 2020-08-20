@@ -195,9 +195,10 @@ padding-bottom: 10px;
 }
 
 .pagination {
-display: flex;
-justify-content: center;
-margin: auto;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding: 30px;
 }
 
 .pagination a {
@@ -210,7 +211,7 @@ transition: background-color .3s;
 
 .pagination a.active {
 background-color: #4CAF50;
-color: blue;
+color: red;
 }
 
 .pagination a:hover:not(.active) {background-color: #3fb573;}
@@ -254,6 +255,9 @@ object-fit: cover;
 @media screen and (max-width: 800px) {
 .cards {
   grid-template-columns: repeat(2, 1fr);
+}
+#sort{
+  width: 25%;
 }
 table {
   border: 0;
@@ -317,6 +321,62 @@ table td:last-child {
 }
 table{
   border:0;
+}
+#sort{
+  width: 25%;
+}
+table {
+  border: 0;
+}
+
+table caption {
+  font-size: 1.3em;
+}
+
+table thead {
+  border: none;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+table tr {
+  border-bottom: 3px solid #3fb573;
+  display: block;
+  margin-bottom: .625em;
+  /* padding: 5px; */
+}
+
+table td {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  font-size: .8em;
+  text-align: right;
+  text-align: center;
+}
+
+td img{
+width: 50%;
+height: auto;
+object-fit: cover;
+}
+table td::before {
+  /*
+  * aria-label has no advantage, it won't be read inside a table
+  content: attr(aria-label);
+  */
+  content: attr(data-label);
+  float: left;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+table td:last-child {
+  border-bottom: 0;
 }
 }
 

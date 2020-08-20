@@ -6,6 +6,9 @@ import { Provider } from 'react-redux';
 import store, {persistor} from './store';
 import { PersistGate } from 'redux-persist/integration/react';
 
+// if( window.location.search === '?debug' ){
+  // persistor.purge();
+// }
 
 ReactDOM.render(
   <Provider store={store}>
