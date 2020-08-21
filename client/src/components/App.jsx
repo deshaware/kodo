@@ -24,7 +24,7 @@ function App() {
   return (
       <Fragment>
         {error ? (
-          <CustomError />
+          <CustomError className="container" />
         ) : (
           <div className="container">
             <Search />
