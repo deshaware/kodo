@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 
 require('./config')
 require('./data')
+require('./redis')
+// Redis Client Setup
 
 app.use( (req, res, next) => {
     req.header('Access-Control-Allow-Origin', '*')

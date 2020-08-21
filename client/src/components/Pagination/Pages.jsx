@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
-import { setCurrentPage } from '../actions';
+import { setCurrentPage } from '../../actions';
+import PageItems from './PageItems';
 
 const Pagiation = () => {
 
@@ -21,15 +22,13 @@ const Pagiation = () => {
     const generatePages = () => {
         let arr = [];
 
-        for (let index = currentPage; index <= totalPages; index++) {
+        for (let index = 1; index <= totalPages; index++) {
             console.log("GENERATING PAGE NUMBER", currentPage)
             arr.push( <a  
                 key={index} 
                 onClick={ (e) => setPage(index) }
                 style={{border: currentPage === index ? '#4CAF50': '#fff'}}
             >{index}</a>)
-            if(arr.length == 6)
-                return arr
         }
         return arr;
     }
@@ -48,9 +47,7 @@ const Pagiation = () => {
 
     return (
         <div className="pagination">
-        <a  onClick={ e  => currentPage > 1 ? setPage(page-1) : ''} >&laquo;</a>
-            {generatePages()}
-        <a onClick={ e  => page + 5 < totalPages ? setPage(page+1): ''} >&raquo;</a>
+            <PageItems pages={generatePages()} />
         </div>
     )
 }

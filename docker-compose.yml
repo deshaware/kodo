@@ -1,0 +1,40 @@
+version: '3'
+services: 
+    # postgres:
+    #     image: 'postgres:latest'
+    
+    nginx:
+        build: 
+            dockerfile: Dockerfile
+            context: ./nginx
+        restart: always
+        ports: 
+            - '3050:80'
+
+    redis:
+        image: 'redis:latest'
+    
+    api:
+        build: 
+            context: ./server
+            dockerfile: Dockerfile
+        environment: 
+            - REDISHOST=redis
+            - REDISPORT=6379
+            - PGUSER=postgre
+            - PG_HOST=ec2-34-238-26-109.compute-1.amazonaws.com
+            - PG_DATABASE=d4b1g6fgm6le78
+            - PG_USER=vksjmmgmubknrm
+            - PG_PASSWORD=bf107849840bd246f9e8c70b2ae3e7481851898be450913472d56377c488551f
+            - PG_PORT=5432
+        ports: 
+            - '5000:5000'
+        
+    client:
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        stdin_open: true
+        ports: 
+            - '3000:3000'
+

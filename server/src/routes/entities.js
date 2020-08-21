@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const pg = require("../data");
-const { sortData, termGenerator } = require('../service');
+const { sortData, termGenerator } = require('../service/db');
+const { cacheQuery, getFromCache } = require('../service/cache');
 
 router.get('/getData', async ( req, res ) => {
     try {
@@ -14,15 +15,17 @@ router.get('/getData', async ( req, res ) => {
         let limitRecord = (limit && limit > 0) ? ` LIMIT ${limit}` : ' LIMIT ALL';
         let offset = (skip && skip > 0) ? ` OFFSET ${skip}` : ' OFFSET 0';
 
-        const countQuery = await pg.query(select)
+        const countQueryInCache = await getFromCache('count', select);
+        const countQuery = countQueryInCache ? countQueryInCache : await cacheQuery('count', select)
         const query = select + sort + offset + limitRecord ;
         console.log(query)
-        let result = await pg.query(query)
+        const cacheResult = await getFromCache('query', query)
+        let result = cacheResult ? cacheResult :  await cacheQuery('query', query)
         res.status(200).send({
             status: 'SUCCESS',
             message: 'Data fetched successfully',
-            responseCount: countQuery.rowCount,
-            response: result.rows
+            responseCount: countQuery,
+            response: result
         })
     } catch (error) {
         console.log(error)

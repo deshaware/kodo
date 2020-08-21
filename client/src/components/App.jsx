@@ -6,7 +6,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import Search from './Search'
 import CardGrid from './card/CardGrid'
 import Table from './table/Table';
-import Pagination from './Pagiation'
+import Pagination from './Pagination/Pages'
 
 function App() {
   const {items, isLoading, pages, currentPage} = useSelector(state => ({
