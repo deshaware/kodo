@@ -1,9 +1,6 @@
 import { combineReducers } from 'redux';
-import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE } from '../actions/types';
+import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE, ERROR } from '../actions/types';
 import {persistor} from '../store';
-
-//service
-import { setPages } from '../service';
 
 const initialState = {
     records: [],
@@ -12,7 +9,8 @@ const initialState = {
     currentPage: 1,
     search: '',
     sortBy: '',
-    loading: false
+    loading: false,
+    error: false
 }
 
 const data = (state = initialState, action) => {
@@ -20,6 +18,7 @@ const data = (state = initialState, action) => {
         case LOADING:
             return {
                 ...state,
+                error: false,
                 loading: true
             };
         case GET_RECORDS:
@@ -32,25 +31,37 @@ const data = (state = initialState, action) => {
                 recordsCount: action.payload.response.responseCount,
                 search: search,
                 sortBy: sortBy,
+                error: false,
                 currentPage: 1
             };
         case CLEAR_RECORDS:
             persistor.purge()
             return {
                 ...state,
-                loading: false,
-                pages: 0,
                 records: [],
+                pages: 0,
+                recordsCount: 0,
+                currentPage: 1,
                 search: '',
-                sortBy: ''
+                sortBy: '',
+                loading: false,
+                error: false,
             }
         case CHANGE_CURRENT_PAGE:
             return {
                 ...state,
                 loading: false,
                 records: action.payload.response,
-                currentPage: action.payload.currentPage
+                currentPage: action.payload.currentPage,
+                error: false,
             };
+        
+        case ERROR:
+            return {
+                ...state,
+                records: [],
+                error: action.payload
+            }
         default:
             return state;
     }

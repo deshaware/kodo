@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE } from './types';
+import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE, ERROR } from './types';
 
 import { generateQuery } from '../service';
 
@@ -23,8 +23,8 @@ export const fetchRecords = (search, sortBy) => dispatch => {
         .catch( err => {
             console.log(err)
             dispatch({
-                type: GET_RECORDS,
-                payload: {}
+                type: ERROR,
+                payload: err
             })
         })
 }
@@ -49,8 +49,8 @@ export const setCurrentPage = (search, sortBy, newPage) => dispatch => {
         .catch( err => {
             console.log(err)
             dispatch({
-                type: GET_RECORDS,
-                payload: {}
+                type: ERROR,
+                payload: err
             })
         });
 }
