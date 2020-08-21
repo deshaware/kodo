@@ -21,13 +21,11 @@ const Pagiation = () => {
     
     const generatePages = () => {
         let arr = [];
-
         for (let index = 1; index <= totalPages; index++) {
-            console.log("GENERATING PAGE NUMBER", currentPage)
             arr.push( <a  
                 key={index} 
                 onClick={ (e) => setPage(index) }
-                style={{border: currentPage === index ? '#4CAF50': '#fff'}}
+                style={{color: currentPage === index ? '#4CAF50': '#fff'}}
             >{index}</a>)
         }
         return arr;

@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE, ERROR } from '../actions/types';
-import {persistor} from '../store';
+import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE, ERROR, REFRESH } from '../actions/types';
 
 const initialState = {
     records: [],
@@ -35,7 +34,6 @@ const data = (state = initialState, action) => {
                 currentPage: 1
             };
         case CLEAR_RECORDS:
-            persistor.purge()
             return {
                 ...state,
                 records: [],
@@ -44,8 +42,6 @@ const data = (state = initialState, action) => {
                 currentPage: 1,
                 search: '',
                 sortBy: '',
-                loading: false,
-                error: false,
             }
         case CHANGE_CURRENT_PAGE:
             return {
@@ -61,6 +57,11 @@ const data = (state = initialState, action) => {
                 ...state,
                 records: [],
                 error: action.payload
+            }
+        case REFRESH:
+            return {
+                ...state,
+                error: false
             }
         default:
             return state;

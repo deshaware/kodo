@@ -3,3 +3,4 @@ export const CLEAR_RECORDS = "CLEAR_RECORDS";
 export const LOADING = "LOADING";
 export const CHANGE_CURRENT_PAGE = "CHANGE_CURRENT_PAGE"
 export const ERROR = "ERROR"
+export const REFRESH = "REFRESH"

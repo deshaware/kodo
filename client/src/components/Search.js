@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import {  useDispatch, useSelector, shallowEqual } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 
 //action
 import {clearRecords, fetchRecords} from '../actions';
 
 const Search = () => {
+    console.log("In Search JS")
     const [ search, setSearch] = useState('');
     const [ sortBy, setSortBy] = useState('name');
 
     const dispatch = useDispatch()
-
-    const { items } = useSelector(state => ({
-            items: state.data.records
-        }), shallowEqual)
 
     const onChangeInput = e => {
         setSearch(e.target.value)
@@ -24,16 +21,14 @@ const Search = () => {
         e.preventDefault();
     }
 
-    useEffect( () => {
-        console.log("useEffect")
-        console.log("items", items)
-        fetchData()
-    }, [search, sortBy])
-
     const fetchData = () => {
-        dispatch(clearRecords)
+        dispatch(clearRecords())
         dispatch(fetchRecords(search , sortBy))
     }
+
+    useEffect( () => {
+        fetchData()
+    }, [search, sortBy])
 
     // fetchData()
     return (

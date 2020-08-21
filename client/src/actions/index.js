@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE, ERROR } from './types';
+import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE, ERROR, REFRESH } from './types';
 
 import { generateQuery } from '../service';
+import {persistor} from '../store';
 
 export const fetchRecords = (search, sortBy) => dispatch => {
     //initially state changed to loading
@@ -21,16 +22,17 @@ export const fetchRecords = (search, sortBy) => dispatch => {
             })
         })
         .catch( err => {
-            console.log(err)
+            console.log("error in fetchRecordsAction", err)
             dispatch({
                 type: ERROR,
-                payload: err
+                payload: err.message
             })
         })
 }
 
 export const clearRecords = () => dispatch => {
     console.log("clearRecords")
+    persistor.purge()
     dispatch({
         type: CLEAR_RECORDS
     })
@@ -47,10 +49,10 @@ export const setCurrentPage = (search, sortBy, newPage) => dispatch => {
             })
         })
         .catch( err => {
-            console.log(err)
+            console.log("Error in set current page action",err)
             dispatch({
                 type: ERROR,
-                payload: err
+                payload: err.message
             })
         });
 }
@@ -61,3 +63,8 @@ export const dataLoading = () => {
     }
 }
 
+export const refresh = () => {
+    return {
+        type: REFRESH
+    }
+}

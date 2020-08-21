@@ -1,19 +1,17 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useDispatch} from 'react-redux'
-import { clearRecords } from '../actions';
+import { refresh, dataLoading } from '../actions';
 
 const Error = () => {
     const dispatch = useDispatch();
-
-    // dispatch(clearRecords())
-    const tryAgain = () => {
-        dispatch(clearRecords())
-    }
-
+    console.log("In ERror Js")
     return (
-        <div className="container">
-            Something went wrong! <a onClick={tryAgain()}>Try Again</a>
-        </div>
+        <Fragment className="container">
+            <div className="error">
+                Something went wrong! <a onClick={ () => {dispatch(dataLoading());dispatch(refresh());}} style={{textDecoration:'underline', color:'#3fb573'}}>Try Again</a>
+            </div>
+        </Fragment>
+        
     )
 }
 

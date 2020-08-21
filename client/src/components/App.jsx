@@ -19,20 +19,20 @@ function App() {
           }),
           shallowEqual)
 
-  console.log("App",items,pages,currentPage)
+  console.log("App",items,pages,currentPage, "error", error)
   
   return (
       <Fragment>
-      {error ? (
-        <CustomError />
-      ) : (
-        <div className="container">
-          <Search />
-          <CardGrid items={items} isLoading={isLoading} />
-          <Pagination pages={pages} currentPage={currentPage} />
-          <Table items={items} isLoading={isLoading} />
-        </div>
-      )}
+        {error ? (
+          <CustomError />
+        ) : (
+          <div className="container">
+            <Search />
+            <CardGrid items={items} isLoading={isLoading} />
+            <Pagination pages={pages} currentPage={currentPage} />
+            <Table items={items} isLoading={isLoading} />
+          </div>
+        )}
       </Fragment>
   );
 }
