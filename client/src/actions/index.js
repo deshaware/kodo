@@ -6,7 +6,7 @@ import {persistor} from '../store';
 
 export const fetchRecords = (search, sortBy, orderBy) => dispatch => {
     //initially state changed to loading
-    console.log("Tryina fetch")
+    console.log("Tryina fetch", orderBy)
     
     dispatch(dataLoading());
     axios.get(generateQuery(search, sortBy, orderBy, 0))
@@ -17,7 +17,8 @@ export const fetchRecords = (search, sortBy, orderBy) => dispatch => {
                 payload: {
                     response: res.data,
                     search,
-                    sortBy
+                    sortBy,
+                    orderBy
                 }
             })
         })
@@ -45,7 +46,7 @@ export const setCurrentPage = (search, sortBy, orderBy, newPage) => dispatch => 
         .then( res => {
             dispatch({
                 type: CHANGE_CURRENT_PAGE,
-                payload: {response: res.data.response, currentPage: newPage}
+                payload: {records: res.data.response, currentPage: newPage, orderBy}
             })
         })
         .catch( err => {

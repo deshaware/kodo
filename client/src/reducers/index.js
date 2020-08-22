@@ -8,7 +8,7 @@ const initialState = {
     currentPage: 1,
     search: '',
     sortBy: '',
-    orderBy: 'Asc',
+    orderBy: 'asc',
     loading: false,
     error: false
 }
@@ -22,15 +22,14 @@ const data = (state = initialState, action) => {
                 loading: true
             };
         case GET_RECORDS:
-            const { search, sortBy } = action.payload;
+            const { search, sortBy, orderBy, response : {responseCount, response} } = action.payload;
             return {
                 ...state,
                 loading: false,
-                pages: parseInt(action.payload.response.responseCount/8 + 1),
-                records: action.payload.response.response,
-                recordsCount: action.payload.response.responseCount,
-                search: search,
-                sortBy: sortBy,
+                pages: parseInt(responseCount/8 + 1),
+                records: response,
+                recordsCount: responseCount,
+                search, sortBy, orderBy,
                 error: false,
                 currentPage: 1
             };
@@ -43,13 +42,16 @@ const data = (state = initialState, action) => {
                 currentPage: 1,
                 search: '',
                 sortBy: '',
+                orderBy: 'asc'
             }
         case CHANGE_CURRENT_PAGE:
+            const { currentPage, records } = action.payload;
             return {
                 ...state,
                 loading: false,
-                records: action.payload.response,
-                currentPage: action.payload.currentPage,
+                records,
+                currentPage: currentPage,
+                // orderBy: action.payload.orderBy,
                 error: false,
             };
         
