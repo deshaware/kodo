@@ -8,6 +8,7 @@ const initialState = {
     currentPage: 1,
     search: '',
     sortBy: '',
+    orderBy: 'Asc',
     loading: false,
     error: false
 }

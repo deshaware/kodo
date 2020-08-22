@@ -8,6 +8,7 @@ const Search = () => {
     console.log("In Search JS")
     const [ search, setSearch] = useState('');
     const [ sortBy, setSortBy] = useState('name');
+    const [ orderBy, setOrderBy] = useState('asc');
 
     const dispatch = useDispatch()
 
@@ -22,13 +23,13 @@ const Search = () => {
     }
 
     const fetchData = () => {
-        dispatch(clearRecords())
-        dispatch(fetchRecords(search , sortBy))
+        // dispatch(clearRecords())
+        dispatch(fetchRecords(search , sortBy, orderBy))
     }
 
     useEffect( () => {
         fetchData()
-    }, [search, sortBy])
+    }, [search, sortBy, orderBy])
 
     // fetchData()
     return (
@@ -42,10 +43,21 @@ const Search = () => {
                 onChange={ e => onChangeInput(e)}
                 autoFocus
             />
+
+            <ul className="order">
+                <li>
+                    <input type="radio" id="asc" name="selector" defaultChecked onClick={ () => setOrderBy('asc')} />
+                    <label for="asc">Top-Bottom</label>
+                </li>
+                <li>
+                    <input type="radio" id="desc" name="selector" onClick={ () => setOrderBy('desc') } />
+                    <label for="desc">Bottom-Top</label>
+                </li>
+            </ul>
                     
             <select name="sort" id="sort" value={sortBy} onChange={ e => onChangeSelect(e) }>
                 <option value="name">Title</option>
-                <option value="datelastedited">DateLastEdited</option>
+                <option value="datelastedited">Last Edited Date</option>
             </select>
             
         </div>

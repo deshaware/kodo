@@ -10,10 +10,11 @@ const Pagiation = () => {
 
     const dispatch = useDispatch()
 
-    const { search, sortBy, totalPages, currentPage } = useSelector(state => ({
+    const { search, sortBy, totalPages, orderBy, currentPage } = useSelector(state => ({
         search: state.data.search,
         sortBy: state.data.sortBy,
         totalPages: state.data.pages,
+        orderBy: state.data.orderBy,
         currentPage: state.data.currentPage
       }),
       shallowEqual)

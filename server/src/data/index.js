@@ -6,6 +6,8 @@ const pgClient = new Pool({
     database: process.env.PG_DATABASE,
     password: process.env.PG_PASSWORD,
     port: process.env.PG_PORT,
+    idleTimeoutMillis: 300000,
+    connectionTimeoutMillis: 300000,
     ssl: { rejectUnauthorized: false }
 });
 

@@ -4,12 +4,12 @@ import { GET_RECORDS, CLEAR_RECORDS, LOADING, CHANGE_CURRENT_PAGE, ERROR, REFRES
 import { generateQuery } from '../service';
 import {persistor} from '../store';
 
-export const fetchRecords = (search, sortBy) => dispatch => {
+export const fetchRecords = (search, sortBy, orderBy) => dispatch => {
     //initially state changed to loading
     console.log("Tryina fetch")
     
     dispatch(dataLoading());
-    axios.get(generateQuery(search, sortBy, 0))
+    axios.get(generateQuery(search, sortBy, orderBy, 0))
         .then( res => {
             console.log(res)
             dispatch({
@@ -38,10 +38,10 @@ export const clearRecords = () => dispatch => {
     })
 }
 
-export const setCurrentPage = (search, sortBy, newPage) => dispatch => {
+export const setCurrentPage = (search, sortBy, orderBy, newPage) => dispatch => {
     console.log("setCurrentPageAction", newPage)
     dispatch(dataLoading());
-    axios.get(generateQuery(search, sortBy, (newPage - 1) * 8))
+    axios.get(generateQuery(search, sortBy, orderBy, (newPage - 1) * 8))
         .then( res => {
             dispatch({
                 type: CHANGE_CURRENT_PAGE,
