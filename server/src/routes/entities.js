@@ -10,13 +10,14 @@ router.get('/getData', async ( req, res ) => {
         let select = (search) ? termGenerator(search) : `Select * from data`;
         console.log(search)
 
-        let sort = sortData(sortBy, orderBy)
-
         let limitRecord = (limit && limit > 0) ? ` LIMIT ${limit}` : ' LIMIT ALL';
         let offset = (skip && skip > 0) ? ` OFFSET ${skip}` : ' OFFSET 0';
 
         const countQueryInCache = await getFromCache('count', select);
         const countQuery = countQueryInCache ? countQueryInCache : await cacheQuery('count', select)
+
+        let sort = sortData(sortBy, orderBy)
+        
         const query = select + sort + offset + limitRecord ;
         console.log(query)
         const cacheResult = await getFromCache('query', query)

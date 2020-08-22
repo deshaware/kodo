@@ -63,15 +63,32 @@ header img {
   border: 0;
 }
 
-.order{
+.order {
+  list-style: none;
   display: flex;
-  flex-direction: column;
-  flex: auto auto;
-  padding: 10px;
-  margin: 5px;
-  border: 0;
+  /* flex-flow: column; */
 }
 
+.order li {
+  flex: 1;
+}
+
+input[type="radio"]{
+  cursor: pointer;
+  display: inline-block;
+}
+
+input[type=radio]:checked ~ .check {
+  border: 5px solid #0DFF92;
+}
+
+input[type=radio]:checked ~ .check::before{
+  background: #0DFF92;
+}
+
+input[type=radio]:checked ~ label{
+  color: #0DFF92;
+}
 /* .order-input{
   flex: 1 1;
   margin: auto;
@@ -266,10 +283,21 @@ object-fit: cover;
 }
 
 @media screen and (max-width: 800px) {
+
 .cards {
   grid-template-columns: repeat(2, 1fr);
 }
+
+.order{
+  /* width: 5%; */
+  margin: auto;
+}
+
+#search{
+  width: fit-content;
+}
 #sort{
+  margin: auto;
   width: 25%;
 }
 table {
@@ -328,15 +356,23 @@ table td:last-child {
 
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 300px) {
 .cards {
   grid-template-columns: 1fr;
 }
-table{
-  border:0;
+.order{
+  /* width: 5%; */
+  margin: auto;
+}
+#search{
+  width: fit-content;
 }
 #sort{
+  margin: auto;
   width: 25%;
+}
+table{
+  border:0;
 }
 table {
   border: 0;
