@@ -37,7 +37,7 @@ export const clearRecords = () => dispatch => {
 
 export const setCurrentPage = (search, sortBy, orderBy, newPage) => dispatch => {
     dispatch(dataLoading());
-    axios.get(generateQuery(search, sortBy, orderBy, (newPage - 1) * 8))
+    axios.get(generateQuery(search, sortBy, orderBy, (newPage - 1) * 6))
         .then( res => {
             dispatch({
                 type: CHANGE_CURRENT_PAGE,

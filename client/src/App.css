@@ -186,41 +186,43 @@ input:checked + .slider:before {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.2rem;
+  padding: 5px;
 }
 
 .card{
-cursor: pointer;
-background-color: transparent;
-/* height: 300px; */
-perspective: 1000px;
-justify-content: center;
-border: 1px #3fb573 solid ;
-border-radius: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  /* height: 300px; */
+  perspective: 1000px;
+  justify-content: center;
+  border: 1px #3fb573 solid ;
+  border-radius: 5px;
+  margin: 10px;
 }
 
 .card h1 {
-font-size: 20px;
-margin: 10px;
-/* border-bottom: 1px #fff solid; */
+  font-size: 20px;
+  margin: 10px;
+  /* border-bottom: 1px #fff solid; */
 
-padding-bottom: 10px;
-/* margin-bottom: 10px; */
-align-content: center;
+  padding-bottom: 10px;
+  /* margin-bottom: 10px; */
+  align-content: center;
 }
 
 .card img {
-width: 100%;
-height: 180px;
-object-fit: cover;
-border-bottom: 1px #fff dotted;
-/* margin: 10px; */
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px #fff dotted;
+  /* margin: 10px; */
 }
 
 .card p {
-margin: 10px;
-padding-bottom: 10px;
+  margin: 10px;
+  padding-bottom: 10px;
 
 }
 
@@ -232,54 +234,54 @@ padding-bottom: 10px;
 }
 
 .pagination a {
-color: white;
-float: left;
-padding: 8px 16px;
-text-decoration: none;
-transition: background-color .3s;
+  color: white;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
 }
 
 .pagination a.active {
-background-color: #4CAF50;
-color: red;
+  background-color: #4CAF50;
+  color: red;
 }
 
 .pagination a:hover:not(.active) {background-color: #3fb573;}
 
 table{
-border: 1px solid #3fb573;
-border-collapse: collapse;
-margin: 0;
-padding: 0;
-width: 100%;
-table-layout: fixed;
+  border: 1px solid #3fb573;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
 }
 
 table caption {
-font-size: 1.5em;
-margin: .5em 0 .75em;
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
 }
 
 table tr {
-/* background-color: #3fb573; */
-border: 1px solid #ddd;
-padding: .35em;
+  /* background-color: #3fb573; */
+  border: 1px solid #ddd;
+  padding: .35em;
 }
 table th, table td{
-text-align: center;
-padding: 10px;
+  text-align: center;
+  padding: 10px;
 }
 table th {
-font-size: 14px;
-letter-spacing: .1em;
-text-transform: uppercase;
-font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 14px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 td img{
-width: 100%;
-height: auto;
-object-fit: cover;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 800px) {
@@ -356,7 +358,7 @@ table td:last-child {
 
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 420px) {
 .cards {
   grid-template-columns: 1fr;
 }

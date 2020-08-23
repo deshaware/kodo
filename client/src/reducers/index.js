@@ -26,7 +26,7 @@ const data = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                pages: parseInt(responseCount/8 + 1),
+                pages: parseInt(responseCount/6),
                 records: response,
                 recordsCount: responseCount,
                 search, sortBy, orderBy,
