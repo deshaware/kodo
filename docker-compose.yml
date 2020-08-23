@@ -19,6 +19,7 @@ services:
             context: ./server
             dockerfile: Dockerfile
         environment: 
+            - NODE_ENV=production
             - REDISHOST=redis
             - REDISPORT=6379
             - PGUSER=postgre
