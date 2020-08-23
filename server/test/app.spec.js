@@ -39,10 +39,10 @@ describe('Sample Test', () => {
       done()
     }); 
 
-    it('POSITIVE With incorrect search term should provide all 0 records ', async done => {
-      const res = await request(app).get('/api/v1/data/getData?search="Central')
+    it('POSITIVE With quoted search term should provide 3 records ', async done => {
+      const res = await request(app).get('/api/v1/data/getData?search="Central"')
       expect(res.status).toEqual(200)
-      expect(res.body.responseCount).toEqual(0)
+      expect(res.body.responseCount).toEqual(3)
       done()
     }); 
 
@@ -53,31 +53,30 @@ describe('Sample Test', () => {
       done()
     }); 
 
-    it('POSITIVE With search term "voluptatum", limit 10 should provide only 10 records ', async done => {
+    it('POSITIVE With search term "voluptatum", limit 10 should provide only 14 records ', async done => {
       const res = await request(app).get('/api/v1/data/getData?search=voluptatum&limit=10')
       expect(res.status).toEqual(200)
-      expect(res.body.responseCount).toEqual(10)
+      expect(res.body.responseCount).toEqual(14)
       done()
     }); 
 
-    it('POSITIVE With search term "voluptatum", limit 10, offset 7 should provide only 7 records ', async done => {
+    it('POSITIVE With search term "voluptatum", limit 10, offset 7 should provide only 14 records ', async done => {
       const res = await request(app).get('/api/v1/data/getData?search=voluptatum&limit=10&skip=7')
       expect(res.status).toEqual(200)
-      expect(res.body.responseCount).toEqual(7)
+      expect(res.body.responseCount).toEqual(14)
       done()
     }); 
     
-    it('POSITIVE With search term "voluptatum", limit 10, offset 7, orderby=dateLastEdited should provide only 7 records ', async done => {
-      const res = await request(app).get('/api/v1/data/getData?sortBy=datelastedited&orderBy=desc&search=voluptatum&limit=10&skip=7')
+    it('POSITIVE With search term "central", limit 10, offset 7, orderby=dateLastEdited should provide only 3 records ', async done => {
+      const res = await request(app).get('/api/v1/data/getData?sortBy=datelastedited&orderBy=desc&search="central"&limit=10&skip=7')
       expect(res.status).toEqual(200)
-      expect(res.body.responseCount).toEqual(7)
-      expect(res.body.response[0].datelastedited).toEqual('2018-06-04T22:18:43.495Z')
+      expect(res.body.responseCount).toEqual(3)
+      expect(res.body.response.length).toEqual(0)
       done()
     }); 
 
     it('NEGATIVE With search term "voluptatum", limit 10 should provide only 10 records ', async done => {
       const res = await request(app).get('/api/v1/data/getData?s')
-      console.log(res)
       expect(res.status).toEqual(200)
       expect(res.body.responseCount).toEqual(100)
       done()

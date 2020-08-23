@@ -5,13 +5,10 @@ import { generateQuery } from '../service';
 import {persistor} from '../store';
 
 export const fetchRecords = (search, sortBy, orderBy) => dispatch => {
-    //initially state changed to loading
-    console.log("Tryina fetch", orderBy)
     
     dispatch(dataLoading());
     axios.get(generateQuery(search, sortBy, orderBy, 0))
         .then( res => {
-            console.log(res)
             dispatch({
                 type: GET_RECORDS,
                 payload: {
@@ -23,7 +20,6 @@ export const fetchRecords = (search, sortBy, orderBy) => dispatch => {
             })
         })
         .catch( err => {
-            console.log("error in fetchRecordsAction", err)
             dispatch({
                 type: ERROR,
                 payload: err.message
@@ -32,7 +28,7 @@ export const fetchRecords = (search, sortBy, orderBy) => dispatch => {
 }
 
 export const clearRecords = () => dispatch => {
-    console.log("clearRecords")
+
     persistor.purge()
     dispatch({
         type: CLEAR_RECORDS
@@ -40,7 +36,6 @@ export const clearRecords = () => dispatch => {
 }
 
 export const setCurrentPage = (search, sortBy, orderBy, newPage) => dispatch => {
-    console.log("setCurrentPageAction", newPage)
     dispatch(dataLoading());
     axios.get(generateQuery(search, sortBy, orderBy, (newPage - 1) * 8))
         .then( res => {
@@ -50,7 +45,6 @@ export const setCurrentPage = (search, sortBy, orderBy, newPage) => dispatch => 
             })
         })
         .catch( err => {
-            console.log("Error in set current page action",err)
             dispatch({
                 type: ERROR,
                 payload: err.message

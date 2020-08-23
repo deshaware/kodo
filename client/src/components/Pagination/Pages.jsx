@@ -41,7 +41,7 @@ const Pagiation = () => {
     }, [page])
 
     const changePage = () => {
-        dispatch(setCurrentPage(search, sortBy, page))
+        dispatch(setCurrentPage(search, sortBy,orderBy, page))
     }
 
     return (
