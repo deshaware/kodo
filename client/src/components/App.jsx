@@ -19,7 +19,7 @@ function App() {
           }),
           shallowEqual)
 
-  console.log("App",items,pages,currentPage, "error", error)
+
   
   return (
       <Fragment>
@@ -28,9 +28,13 @@ function App() {
         ) : (
           <div className="container">
             <Search />
-            <CardGrid items={items} isLoading={isLoading} />
-            <Pagination pages={pages} currentPage={currentPage} />
-            <Table items={items} isLoading={isLoading} />
+            {items.length > 0 ? (
+              <Fragment>
+                <CardGrid items={items} isLoading={isLoading} />
+                <Pagination pages={pages} currentPage={currentPage} />
+                <Table items={items} isLoading={isLoading} />
+              </Fragment>
+            ): <div className="error" style={{minHeight:'20vh'}}>No Result found for query</div>}
           </div>
         )}
       </Fragment>

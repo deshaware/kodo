@@ -12,13 +12,12 @@ const Search = () => {
         stateOrderBy: state.data.orderBy,
       }));
 
-      console.log("IN SEARCH", stateOrderBy)
     const [ search, setSearch] = useState(stateSearch);
     const [ sortBy, setSortBy] = useState(stateSortBy);
     const [ orderBy, setOrderBy] = useState(stateOrderBy);
 
     const dispatch = useDispatch()
-      console.log("Search", orderBy)
+    
     const onChangeInput = e => {
         setSearch(e.target.value)
         e.preventDefault();

@@ -10,12 +10,13 @@ const Pagiation = () => {
 
     const dispatch = useDispatch()
 
-    const { search, sortBy, totalPages, orderBy, currentPage } = useSelector(state => ({
+    const { search, sortBy, totalPages, orderBy, currentPage, loading } = useSelector(state => ({
         search: state.data.search,
         sortBy: state.data.sortBy,
         totalPages: state.data.pages,
         orderBy: state.data.orderBy,
-        currentPage: state.data.currentPage
+        currentPage: state.data.currentPage,
+        loading: state.data.loading
       }),
       shallowEqual)
     
@@ -33,7 +34,6 @@ const Pagiation = () => {
     }
 
     useEffect(() => {
-        console.log("UseEffectPagination", page)
         changePage()
         // return () => {
         //     console.log("UseEffectPaginationReturn")
@@ -46,7 +46,7 @@ const Pagiation = () => {
 
     return (
         <div className="pagination">
-            <PageItems pages={generatePages()} />
+           { loading ? (<div />) : (<PageItems pages={generatePages()} />) } 
         </div>
     )
 }
