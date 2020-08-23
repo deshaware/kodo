@@ -4,7 +4,7 @@ import Loader from '../Loader';
 import Rows from './Rows'
 
 const Table = ( {items, isLoading} ) => {
-    console.log("table", items.length)
+    // console.log("table", items.length)
     return (
              isLoading ? (
                 <Loader />

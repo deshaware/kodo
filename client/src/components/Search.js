@@ -12,13 +12,12 @@ const Search = () => {
         stateOrderBy: state.data.orderBy,
       }));
 
-      console.log("IN SEARCH", stateOrderBy)
     const [ search, setSearch] = useState(stateSearch);
     const [ sortBy, setSortBy] = useState(stateSortBy);
     const [ orderBy, setOrderBy] = useState(stateOrderBy);
 
     const dispatch = useDispatch()
-      console.log("Search", orderBy)
+    
     const onChangeInput = e => {
         setSearch(e.target.value)
         e.preventDefault();
@@ -54,11 +53,11 @@ const Search = () => {
             <ul className="order">
                 <li>
                     <input type="radio" id="asc" name="selector" checked={ orderBy === 'asc' } onClick={ () => setOrderBy('asc')} />
-                    <label for="asc">Top-Bottom</label>
+                    <label htmlFor="asc">Top-Bottom</label>
                 </li>
                 <li>
                     <input type="radio" id="desc" name="selector" checked={ orderBy === 'desc' } onClick={ () => setOrderBy('desc') } />
-                    <label for="desc">Bottom-Top</label>
+                    <label htmlFor="desc">Bottom-Top</label>
                 </li>
             </ul>
                     

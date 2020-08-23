@@ -50,8 +50,7 @@ const data = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 records,
-                currentPage: currentPage,
-                // orderBy: action.payload.orderBy,
+                currentPage,
                 error: false,
             };
         
