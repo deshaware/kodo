@@ -46,7 +46,7 @@ const Pagiation = () => {
 
     return (
         <div className="pagination">
-           { loading ? (<div />) : (<PageItems pages={generatePages()} />) } 
+           <PageItems pages={generatePages()} />
         </div>
     )
 }

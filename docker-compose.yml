@@ -28,14 +28,14 @@ services:
             - PG_PASSWORD=bf107849840bd246f9e8c70b2ae3e7481851898be450913472d56377c488551f
             - PG_PORT=5432
             - PORT=5000
-        ports: 
-            - '5000:5000'
+        # ports: 
+        #     - '5000:5000'
         
     client:
         build:
             context: ./client
             dockerfile: Dockerfile
         stdin_open: true
-        ports: 
-            - '3000:3000'
+        # ports: 
+        #     - '3000:3000'
 
