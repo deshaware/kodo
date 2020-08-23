@@ -24,12 +24,14 @@ const middleware = [thunk];
 
 // purgeStoredState()
 
+const devTools = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : f => f
+
 const store = createStore(
     persistedReducer,
     initialState,
     compose(
         applyMiddleware(...middleware),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        devTools
     )
 );
 export const persistor = persistStore(store)
